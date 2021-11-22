@@ -1,6 +1,7 @@
 <template>
   <div>
     <button id="btn" @click="btnClick">btn</button>
+    <div id="hhh">hhhhh</div>
   </div>
 </template>
 
@@ -21,6 +22,7 @@ export default {
   methods: {
     btnClick(){
       console.log('hhh');
+      $('#hhh').fadeOut(500);
     }
   },
 };
