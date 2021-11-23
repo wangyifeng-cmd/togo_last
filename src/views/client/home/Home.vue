@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button id="btn" @click="btnClick">btn</button>
-    <div id="hhh">hhhhh</div>
+    <!-- <button id="btn" @click="btnClick">btn</button>
+    <div id="hhh">hhhhh</div> -->
   </div>
 </template>
 
