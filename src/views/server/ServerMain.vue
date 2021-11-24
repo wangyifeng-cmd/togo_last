@@ -1,123 +1,90 @@
 <template>
   <v-app id="inspire">
-    
-
     <v-navigation-drawer v-model="drawer" app id="my_drawer">
-      <v-sheet color="grey lighten-4" class="pa-4" >
-        <p style="margin-top: 30px; font-size:250%; font-weight: bold;">管理员</p>
-       
+      <v-sheet color="grey lighten-4" class="pa-4">
+        <v-img
+          src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg "
+          height="20%"
+        ></v-img>
+        <p style="margin-top: 30px; font-size: 250%; font-weight: bold">
+          管理员
+        </p>
 
-        <div>john@vuetifyjs.com</div>
+        <div>Xinny@github.com</div>
       </v-sheet>
 
       <v-divider></v-divider>
-      <v-list>
-        <v-list-item v-for="[icon, text] in links" :key="icon" link>
-          <v-list-item-icon>
-            <v-icon>{{ icon }}</v-icon>
-          </v-list-item-icon>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ text }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+      <el-menu router style="margin-left: -20px; font-size: 50px">
+        <el-menu-item index="/user/TableUser">
+          <i class="el-icon-menu" style="margin-right: 20px"></i>
+          <span slot="title">
+            工作台</span>
+        </el-menu-item>
+        <el-submenu index="2">
+          <template slot="title">
+            <i class="el-icon-user-solid" style="margin-right: 20px"></i>
+            表格管理
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/user/TableUser">用户管理</el-menu-item>
+            <el-menu-item index="/article/create">交通管理</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item index="/article/index">酒店管理</el-menu-item>
+          <el-menu-item index="/article/index">攻略管理</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="3">
+          <i class="el-icon-s-management" style="margin-right: 20px"></i>
+          <span slot="title">操作数据</span>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <i class="el-icon-s-marketing" style="margin-right: 20px"></i>
+          <span slot="title">数据图表</span>
+        </el-menu-item>
+        
+      </el-menu>
     </v-navigation-drawer>
 
-    <v-app-bar app>
+    <v-app-bar app style="box-shadow: 0px 0 0px rgb(0 21 41 / 35%)">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>ToGo游-后台数据管理</v-toolbar-title>
     </v-app-bar>
 
-
     <v-main>
-       <div class="card_wrap">
-                    <v-card class="r_card">
-                        <v-card-title>Ve-histogram</v-card-title>
-                        <v-divider></v-divider>
-                        <div class="item_content">
-                            <div class="chart_wrap">
-                                <ve-histogram
-                                    :data="chartData"
-                                    :extend="chartExtend"
-                                    height="240px"
-                                ></ve-histogram>
-                            </div>
-                        </div>
-                    </v-card>
-                    <v-card class="r_card">
-                        <v-card-title>Ve-line</v-card-title>
-                        <v-divider></v-divider>
-                        <div class="item_content">
-                            <div class="tool">
-                                <div class="t">
-                                    <div class="i">Daily Income</div>
-                                    <div class="r">
-                                        <v-icon>mdi-arrow-up</v-icon>38%
-                                    </div>
-                                </div>
-                                <div class="v">584</div>
-                            </div>
-                            <div class="chart_wrap chart_wrap1">
-                                <ve-line
-                                    :data="chartData2"
-                                    :extend="chartExtend2"
-                                    :settings="chartSettings"
-                                    height="240px"
-                                ></ve-line>
-                            </div>
-                        </div>
-                    </v-card>
-                </div>
-      <Title/>
-      <Table />
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Table from "../../components/server/Table.vue";
-import Title from "../../components/server/Title.vue";
+// import Table from "../../components/server/Table.vue";
+// import Title from "../../components/server/Title.vue";
 
 export default {
-  components: { 
-    Table,
-    Title 
+  components: {
+    // Table,
+    // Title
   },
   data: () => ({
-    cards: ["Today", "Yesterday"],
-    // drawer: null,
     links: [
-      ["mdi-inbox-arrow-down", "Inbox"],
+      ["mdi-inbox-arrow-down", "用户管理"],
       ["mdi-send", "Send"],
       ["mdi-delete", "Trash"],
       ["mdi-alert-octagon", "Spam"],
     ],
     drawer: true,
-    items: [
-      { title: "Home", icon: "mdi-home-city" },
-      { title: "My Account", icon: "mdi-account" },
-      { title: "Users", icon: "mdi-account-group-outline" },
-    ],
-    mini: true,
   }),
-  methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
+  methods: {},
 };
 </script>
 
 
 <style scoped>
 #my_drawer {
-  
   box-shadow: 2px 0 6px rgb(0 21 41 / 35%);
   color: aliceblue;
+  font-size: 15px;
+  /* margin: ; */
 }
 </style>

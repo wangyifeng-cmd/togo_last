@@ -9,6 +9,8 @@ import VueRouter from 'vue-router'
 
 
 import ServerMain from '../views/server/ServerMain.vue'
+import TableUser from '../views/server/TableUser.vue'
+import Table from '../components/server/Table.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +25,18 @@ const routes = [
         name: 'ServerMain',
         component: ServerMain
     },
+    {
+        path: '/user/TableUser',
+        name: 'TableUser',
+        component: TableUser
+    },
+    {
+        path: '/Table',
+        name: 'Table',
+        component: Table
+    },
+    
+    
 ]
 
 const router = new VueRouter({
