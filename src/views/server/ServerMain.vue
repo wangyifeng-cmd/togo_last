@@ -27,7 +27,7 @@
             表格管理
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/user/TableUser">用户管理</el-menu-item>
+            <el-menu-item index="/user/IndexTable">用户管理</el-menu-item>
             <el-menu-item index="/article/create">交通管理</el-menu-item>
           </el-menu-item-group>
           <el-menu-item index="/article/index">酒店管理</el-menu-item>

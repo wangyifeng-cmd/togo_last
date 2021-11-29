@@ -9,8 +9,8 @@ import VueRouter from 'vue-router'
 
 
 import ServerMain from '../views/server/ServerMain.vue'
-import TableUser from '../views/server/TableUser.vue'
-import Table from '../components/server/Table.vue'
+import IndexTable from '../views/server/IndexTable.vue'
+import TableUser from '../components/server/TableUser.vue'
 
 Vue.use(VueRouter)
 
@@ -31,9 +31,9 @@ const routes = [
         component: TableUser
     },
     {
-        path: '/Table',
-        name: 'Table',
-        component: Table
+        path: '/IndexTable',
+        name: 'IndexTable',
+        component: IndexTable
     },
     
     
