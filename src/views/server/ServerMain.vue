@@ -32,11 +32,11 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="/TableUser">用户管理</el-menu-item>
-            <el-menu-item index="/TableTreffic"
-              >交通管理</el-menu-item
-            >
             <el-menu-item index="/TableHotel">酒店管理</el-menu-item>
-            <el-menu-item index="/TableCity">房间管理</el-menu-item>
+            <el-menu-item index="/TableRoom">房间管理</el-menu-item>
+            <el-menu-item index="/TableTreffic"
+              >行程表管理</el-menu-item
+            >
           </el-menu-item-group>
         </el-submenu>
         <el-menu-item index="3">

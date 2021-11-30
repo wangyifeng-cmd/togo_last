@@ -76,18 +76,30 @@
                         </v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="6">
-                        <v-text-field
+                        <!-- <v-text-field
                           v-model="editedItem.start_time"
                           label="出发时间"
-                        >
-                        </v-text-field>
+                        > -->
+                          <el-date-picker
+                            v-model="editedItem.start_time"
+                            type="datetime"
+                            placeholder="出发时间"
+                          >
+                          </el-date-picker>
+                        <!-- </v-text-field> -->
                       </v-col>
                       <v-col cols="12" sm="6" md="6">
-                        <v-text-field
+                        <!-- <v-text-field
                           v-model="editedItem.end_time"
                           label="抵达时间"
                         >
-                        </v-text-field>
+                        </v-text-field> -->
+                        <el-date-picker
+                            v-model="editedItem.end_time"
+                            type="datetime"
+                            placeholder="抵达时间"
+                          >
+                          </el-date-picker>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -245,6 +257,7 @@ export default {
     my_add() {
       let myTraffic = new URLSearchParams();
       const traffic = this.editedItem;
+      // var ta = traffic.start_time;
       myTraffic.append("type", traffic.type);
       myTraffic.append("company", traffic.company);
       myTraffic.append("money", traffic.money);
@@ -253,7 +266,7 @@ export default {
       myTraffic.append("start_time", traffic.start_time);
       myTraffic.append("end_time", traffic.end_time);
       console.log(traffic);
-      this.$http.post(`traffic/addTraffic`,myTraffic).then((res) => {
+      this.$http.post(`traffic/addTraffic`, myTraffic).then((res) => {
         console.log("res.data-res.data-res.data");
         console.log(res.data);
         if (res.data.insertId > 0) {

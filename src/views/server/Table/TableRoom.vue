@@ -9,7 +9,7 @@
     </el-card>
 
     <el-card shadow="always" style="margin: 20px">
-      <v-data-table :headers="headers" :items="users" sort-by="calories">
+      <v-data-table :headers="headers" :items="rooms" sort-by="calories">
         <template v-slot:top>
           <v-toolbar flat>
             <v-toolbar-title>房间表</v-toolbar-title>
@@ -40,45 +40,39 @@
                     <v-row>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.user_id"
-                          label="用户id"
+                          v-model="editedItem.room_id"
+                          label="房间id"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.user_name"
-                          label="姓名"
+                          v-model="editedItem.type"
+                          label="房间类型"
                         >
                         </v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.user_phone"
-                          label="电话"
+                          v-model="editedItem.money"
+                          label="金额"
                         >
                         </v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.user_password"
-                          label="密码"
+                          v-model="editedItem.people"
+                          label="可入住人数"
                         >
                         </v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.user_age"
-                          label="年龄"
+                          v-model="editedItem.count"
+                          label="房间剩余数"
                         >
                         </v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.user_city"
-                          label="城市"
-                        >
-                        </v-text-field>
-                      </v-col>
+                      
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -157,22 +151,21 @@ export default {
       
       { text: "操作", value: "actions", sortable: false },
     ],
-    users: [],
+    rooms: [],
     editedIndex: -1,
     editedItem: {
       room_id: "",
-      type: "my_friend",
-      money: 19991314520,
-      people: "123",
+      type: "大床房",
+      money: 333333,
+      people: 123,
       count: 18,
     },
     defaultItem: {
-      user_id: "",
-      user_name: "my_friend",
-      user_phone: 19991314520,
-      user_password: "123pw",
-      user_age: 18,
-      user_city: "深圳",
+       room_id: "",
+      type: "大床房",
+      money: 333333,
+      people: 123,
+      count: 18,
     },
   }),
 
@@ -211,21 +204,21 @@ export default {
     my_init() {
       // 初始化表格数据
       // 从后台获取数据
-      this.$http.get("user/getAllUser").then((res) => {
-        this.users = res.data;
+      this.$http.get("room/getAllRoom").then((res) => {
+        this.rooms = res.data;
       });
     },
 
     my_add() {
-      let myUser = new URLSearchParams();
-      const user = this.editedItem;
-      myUser.append("user_name", user.user_name);
-      myUser.append("user_phone", user.user_phone);
-      myUser.append("user_password", user.user_password);
-      myUser.append("user_age", user.user_age);
-      myUser.append("user_city", user.user_city);
-      console.log(user);
-      this.$http.post(`user/addUser`,myUser).then((res) => {
+      let myRoom = new URLSearchParams();
+      const room = this.editedItem;
+      myRoom.append("room_id", room.room_id);
+      myRoom.append("type", room.type);
+      myRoom.append("money", room.money);
+      myRoom.append("people", room.people);
+      myRoom.append("count", room.count);
+      console.log(room);
+      this.$http.post(`room/addRoom`,myRoom).then((res) => {
         console.log("res.data-res.data-res.data");
         console.log(res.data);
         if (res.data.insertId > 0) {
@@ -244,16 +237,15 @@ export default {
     },
 
     my_update() {
-      let myUser = new URLSearchParams();
-      const user = this.editedItem;
-      myUser.append("user_id", user.user_id);
-      myUser.append("user_name", user.user_name);
-      myUser.append("user_phone", user.user_phone);
-      myUser.append("user_password", user.user_password);
-      myUser.append("user_age", user.user_age);
-      myUser.append("user_city", user.user_city);
-      console.log(user);
-      this.$http.post(`user/updateUserById`,myUser).then((res) => {
+      let myRoom = new URLSearchParams();
+      const room = this.editedItem;
+      myRoom.append("room_id", room.room_id);
+      myRoom.append("type", room.type);
+      myRoom.append("money", room.money);
+      myRoom.append("people", room.people);
+      myRoom.append("count", room.count);
+      console.log(room);
+      this.$http.post(`room/updateRoomById`,myRoom).then((res) => {
         console.log(res.data);
         if (res.data.changedRows > 0) {
           this.$message({
@@ -272,11 +264,11 @@ export default {
 
     my_deleteId() {
       console.log("deleteById-deleteById-deleteById-deleteById");
-      let myUserId = new URLSearchParams();
-      let uid = this.editedItem.user_id;
-      myUserId.append("user_id", uid);
+      let myRoomId = new URLSearchParams();
+      let uid = this.editedItem.room_id;
+      myRoomId.append("room_id", uid);
       console.log(uid);
-      this.$http.post(`user/deleteById`, myUserId).then((res) => {
+      this.$http.post(`room/deleteById`, myRoomId).then((res) => {
         console.log(res.data);
         if (res.data.affectedRows > 0) {
           this.$message({
@@ -294,19 +286,19 @@ export default {
     },
 
     editItem(item) {
-      this.editedIndex = this.users.indexOf(item);
+      this.editedIndex = this.rooms.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.users.indexOf(item);
+      this.editedIndex = this.rooms.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      // this.users.splice(this.editedIndex, 1);
+      // this.rooms.splice(this.editedIndex, 1);
       this.closeDelete();
       // console.log(this.editedItem);
       this.my_deleteId();
@@ -330,13 +322,13 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        // Object.assign(this.users[this.editedIndex], this.editedItem);
+        // Object.assign(this.rooms[this.editedIndex], this.editedItem);
         console.log("my_updateId-my_updateId");
         this.my_update();
       } else {
-        console.log("addUser-addUser-addUser-addUser");
+        console.log("addRoom-addRoom-addRoom-addRoom");
         this.my_add();
-        // this.users.push(this.editedItem);
+        // this.rooms.push(this.editedItem);
       }
       this.close();
     },
