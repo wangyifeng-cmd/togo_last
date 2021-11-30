@@ -9,7 +9,7 @@ import VueRouter from 'vue-router'
 
 
 import ServerMain from '../views/server/ServerMain.vue'
-
+import WorkSpace from '../views/server/WorkSpace.vue'
 
 import TableUser from '../views/server/Table/TableUser.vue'
 import TableCity from '../views/server/Table/TableCity.vue'
@@ -31,37 +31,36 @@ const routes = [
         name: 'ServerMain',
         component: ServerMain,
     },
-    
-    
     {
-        path: '/IndexTable',
-        name: 'IndexTable',
-        component: TableUser,
-        children: [
-            {
-                path: 'TableUser',
-                name: 'TableUser',
-                component : TableUser
-            },
-            
-            {
-                path: 'TableTreffic',
-                name: 'TableTreffic',
-                component: TableTreffic
-            },
-            {
-                path: 'TableHotel',
-                name: 'TableHotel',
-                component: TableHotel
-            },
-            {
-                path: 'TableCity',
-                name: 'TableCity',
-                component: TableCity
-            },
-
-        ]
+        path: '/WorkSpace',
+        name: 'WorkSpace',
+        component: WorkSpace,
     },
+
+
+    {
+        path: '/TableUser',
+        name: 'TableUser',
+        component: TableUser
+    },
+
+    {
+        path: '/TableTreffic',
+        name: 'TableTreffic',
+        component: TableTreffic
+    },
+    {
+        path: '/TableHotel',
+        name: 'TableHotel',
+        component: TableHotel
+    },
+    {
+        path: '/TableCity',
+        name: 'TableCity',
+        component: TableCity
+    },
+
+
 
 ]
 

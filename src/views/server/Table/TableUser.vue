@@ -229,7 +229,7 @@ export default {
       myUser.append("user_age", user.user_age);
       myUser.append("user_city", user.user_city);
       console.log(user);
-      this.$http.post(`user/addUser`).then((res) => {
+      this.$http.post(`user/addUser`,myUser).then((res) => {
         console.log("res.data-res.data-res.data");
         console.log(res.data);
         if (res.data.insertId > 0) {
@@ -257,7 +257,7 @@ export default {
       myUser.append("user_age", user.user_age);
       myUser.append("user_city", user.user_city);
       console.log(user);
-      this.$http.post(`user/updateUserById`, myUser).then((res) => {
+      this.$http.post(`user/updateUserById`,myUser).then((res) => {
         console.log(res.data);
         if (res.data.changedRows > 0) {
           this.$message({

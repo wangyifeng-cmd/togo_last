@@ -10,6 +10,7 @@
         <el-breadcrumb-item>活动详情</el-breadcrumb-item>
       </el-breadcrumb>
     </el-card>
+    
 
     <el-card shadow="always" style="margin: 20px; ">
 

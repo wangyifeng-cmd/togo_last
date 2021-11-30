@@ -16,20 +16,20 @@
 
       <v-data-table
           :headers="headers"
-          :items="users"
+          :items="hotels"
           sort-by="calories"
       >
         <template v-slot:top>
           <v-toolbar flat>
-            <v-toolbar-title>用户表</v-toolbar-title>
+            <v-toolbar-title>酒店表</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn color="primary" dark class="mb-2">刷新</v-btn>
+                <v-btn color="primary" dark class="mb-2" @click="my_init">刷新</v-btn>
                 <div style="width: 10px"></div>
                 <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                  新建用户
+                  添加酒店
                 </v-btn>
               </template>
 
@@ -43,31 +43,28 @@
                     <v-row>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                            v-model="editedItem.user_id"
-                            label="用户id"
+                            v-model="editedItem.hotel_id"
+                            label="酒店id"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field v-model="editedItem.user_name" label="姓名">
+                        <v-text-field v-model="editedItem.name" label="酒店名">
                         </v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field v-model="editedItem.user_phone" label="电话">
+                        <v-text-field v-model="editedItem.phone" label="电话">
                         </v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                            v-model="editedItem.user_password"
-                            label="密码"
-                        >
+                        <v-text-field v-model="editedItem.city" label="所在城市">
                         </v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field v-model="editedItem.user_age" label="年龄">
+                        <v-text-field v-model="editedItem.address" label="详细地址">
                         </v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field v-model="editedItem.user_city" label="城市">
+                        <v-text-field v-model="editedItem.type" label="类型">
                         </v-text-field>
                       </v-col>
                     </v-row>
@@ -83,7 +80,7 @@
             </v-dialog>
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
-                <v-card-title class="text-h5">确定删除改用户？</v-card-title>
+                <v-card-title class="text-h5">确定删除改酒店？</v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="closeDelete">
@@ -125,50 +122,51 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "用户id",
+        text: "酒店id",
         align: "start",
         sortable: true,
-        value: "user_id",
+        value: "hotel_id",
       },
       {
-        text: "姓名",
-        value: "user_name",
+        text: "酒店名",
+        value: "name",
       },
       {
         text: "电话",
-        value: "user_phone",
-      },
-      {
-        text: "密码",
-        value: "user_password",
-      },
-      {
-        text: "年龄",
-        value: "user_age",
+        value: "phone",
       },
       {
         text: "城市",
-        value: "user_city",
+        value: "city",
+      },
+      {
+        text: "具体地址",
+        value: "address",
+      },
+      {
+        text: "类型",
+        value: "type",
       },
       {text: "操作", value: "actions", sortable: false},
     ],
-    users: [],
+    hotels: [],
     editedIndex: -1,
     editedItem: {
-      user_id: "",
-      user_name: "my_friend",
-      user_phone: 19991314520,
-      user_password: "123pw",
-      user_age: 18,
-      user_city: "深圳",
+      hotel_id: "",
+      name: "土狗大酒店",
+      phone: 19991314520,
+      city: "深圳",
+      address: 18,
+      type: "5星",
     },
     defaultItem: {
-      user_id: "",
-      user_name: "my_friend",
-      user_phone: 19991314520,
-      user_password: "123pw",
-      user_age: 18,
-      user_city: "深圳",
+      hotel_id: "",
+      name: "togo_big_hotel",
+      phone: 19991314520,
+      city: "深圳",
+      address: 18,
+      type: "5星",
+      
     },
   }),
 
@@ -207,22 +205,22 @@ export default {
     my_init() {
       // 初始化表格数据
       // 从后台获取数据
-      this.$http.get("user/getAllUser").then((res) => {
-        this.users = res.data;
+      this.$http.get("hotel/getAllHotel").then((res) => {
+        this.hotels = res.data;
       });
     },
 
 
     my_add() {
-      let myUser = new URLSearchParams();
-      const user = this.editedItem;
-      myUser.append('user_name', user.user_name);
-      myUser.append('user_phone', user.user_phone);
-      myUser.append('user_password', user.user_password);
-      myUser.append('user_age', user.user_age);
-      myUser.append('user_city', user.user_city);
-      console.log(user);
-      this.$http.post(`user/addUser`,).then((res) => {
+      let myHotel = new URLSearchParams();
+      const hotel = this.editedItem;
+      myHotel.append('name', hotel.name);
+      myHotel.append('phone', hotel.phone);
+      myHotel.append('city', hotel.city);
+      myHotel.append('address', hotel.address);
+      myHotel.append('type', hotel.type);
+      console.log(hotel);
+      this.$http.post(`hotel/addHotel`,myHotel).then((res) => {
         console.log("res.data-res.data-res.data")
         console.log(res.data);
         if (res.data.insertId > 0) {
@@ -241,16 +239,16 @@ export default {
     },
 
     my_update() {
-      let myUser = new URLSearchParams();
-      const user = this.editedItem;
-      myUser.append('user_id', user.user_id);
-      myUser.append('user_name', user.user_name);
-      myUser.append('user_phone', user.user_phone);
-      myUser.append('user_password', user.user_password);
-      myUser.append('user_age', user.user_age);
-      myUser.append('user_city', user.user_city);
-      console.log(user);
-      this.$http.post(`user/updateUserById`, myUser).then((res) => {
+      let myHotel = new URLSearchParams();
+      const hotel = this.editedItem;
+      myHotel.append('hotel_id', hotel.hotel_id);
+      myHotel.append('name', hotel.name);
+      myHotel.append('phone', hotel.phone);
+      myHotel.append('city', hotel.city);
+      myHotel.append('address', hotel.address);
+      myHotel.append('type', hotel.type);
+      console.log(hotel);
+      this.$http.post(`hotel/updateHotelById`, myHotel).then((res) => {
         console.log(res.data);
         if (res.data.changedRows > 0) {
           this.$message({
@@ -269,11 +267,11 @@ export default {
 
     my_deleteId() {
       console.log("deleteById-deleteById-deleteById-deleteById")
-      let myUserId = new URLSearchParams();
-      let uid = this.editedItem.user_id;
-      myUserId.append('user_id', uid);
+      let myHotelId = new URLSearchParams();
+      let uid = this.editedItem.hotel_id;
+      myHotelId.append('hotel_id', uid);
       console.log(uid)
-      this.$http.post(`user/deleteById`, myUserId).then((res) => {
+      this.$http.post(`hotel/deleteById`, myHotelId).then((res) => {
         console.log(res.data);
         if (res.data.affectedRows > 0) {
           this.$message({
@@ -291,19 +289,19 @@ export default {
     },
 
     editItem(item) {
-      this.editedIndex = this.users.indexOf(item);
+      this.editedIndex = this.hotels.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.users.indexOf(item);
+      this.editedIndex = this.hotels.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      // this.users.splice(this.editedIndex, 1);
+      // this.hotels.splice(this.editedIndex, 1);
       this.closeDelete();
       // console.log(this.editedItem);
       this.my_deleteId();
@@ -327,13 +325,13 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        // Object.assign(this.users[this.editedIndex], this.editedItem);
+        // Object.assign(this.hotels[this.editedIndex], this.editedItem);
         console.log("my_updateId-my_updateId");
         this.my_update();
       } else {
-        console.log("addUser-addUser-addUser-addUser");
+        console.log("addHotel-addHotel-addHotel-addHotel");
         this.my_add();
-        // this.users.push(this.editedItem);
+        // this.hotels.push(this.editedItem);
       }
       this.close();
     },

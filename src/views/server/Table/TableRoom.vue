@@ -1,20 +1,18 @@
 <template>
   <div>
-    <div>TableTreffic</div>
     <el-card shadow="always" style="margin: 20px">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/' }">工作台</el-breadcrumb-item>
+        <el-breadcrumb-item><a href="/">表格管理</a></el-breadcrumb-item>
+        <el-breadcrumb-item>用户管理</el-breadcrumb-item>
       </el-breadcrumb>
     </el-card>
 
     <el-card shadow="always" style="margin: 20px">
-      <v-data-table :headers="headers" :items="traffics" sort-by="calories">
+      <v-data-table :headers="headers" :items="users" sort-by="calories">
         <template v-slot:top>
           <v-toolbar flat>
-            <v-toolbar-title>交通表</v-toolbar-title>
+            <v-toolbar-title>房间表</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
@@ -28,7 +26,7 @@
                   v-bind="attrs"
                   v-on="on"
                 >
-                  新建行程
+                  添加房间
                 </v-btn>
               </template>
 
@@ -42,50 +40,42 @@
                     <v-row>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.traffic_id"
-                          label="行程id"
+                          v-model="editedItem.user_id"
+                          label="用户id"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.type"
-                          label="行程类型"
-                        >
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field v-model="editedItem.company" label="公司">
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field v-model="editedItem.money" label="金额">
-                        </v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.start_position"
-                          label="起点"
+                          v-model="editedItem.user_name"
+                          label="姓名"
                         >
                         </v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.end_position"
-                          label="终点"
+                          v-model="editedItem.user_phone"
+                          label="电话"
                         >
                         </v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="6">
+                      <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.start_time"
-                          label="出发时间"
+                          v-model="editedItem.user_password"
+                          label="密码"
                         >
                         </v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="6">
+                      <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.end_time"
-                          label="抵达时间"
+                          v-model="editedItem.user_age"
+                          label="年龄"
+                        >
+                        </v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.user_city"
+                          label="城市"
                         >
                         </v-text-field>
                       </v-col>
@@ -101,8 +91,8 @@
               </v-card>
             </v-dialog>
             <v-dialog v-model="dialogDelete" max-width="500px">
-              <v-card style="padding: 20px">
-                <v-card-title class="text-h5">确定删除改行程？</v-card-title>
+              <v-card>
+                <v-card-title class="text-h5">确定删除？</v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="closeDelete">
@@ -143,62 +133,46 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "行程id",
+        text: "房间编号",
         align: "start",
         sortable: true,
-        value: "traffic_id",
+        value: "room_id",
       },
       {
-        text: "类型",
+        text: "房间类型",
         value: "type",
-      },
-      {
-        text: "公司",
-        value: "company",
       },
       {
         text: "金额",
         value: "money",
       },
       {
-        text: "起点",
-        value: "start_position",
+        text: "可入住人数",
+        value: "people",
       },
       {
-        text: "终点",
-        value: "end_position",
+        text: "房间剩余数",
+        value: "count",
       },
-      {
-        text: "出发时间",
-        value: "start_time",
-      },
-      {
-        text: "抵达时间",
-        value: "end_time",
-      },
+      
       { text: "操作", value: "actions", sortable: false },
     ],
-    traffics: [],
+    users: [],
     editedIndex: -1,
     editedItem: {
-      traffic_id: "",
-      type: "宇宙飞船",
-      company: "to狗航天",
-      money: "12000000",
-      start_position: "地球",
-      end_position: "双子阿尔法星",
-      start_time: "2024-2-2 10:00:20",
-      end_time: "2023-2-2 10:00:20",
+      room_id: "",
+      type: "my_friend",
+      money: 19991314520,
+      people: "123",
+      count: 18,
     },
     defaultItem: {
-      traffic_id: "",
-      type: "宇宙飞船",
-      company: "to狗航天",
-      money: "12000000",
-      start_position: "地球",
-      end_position: "双子阿尔法星",
-      start_time: "2024-2-2 10:00:20",
-      end_time: "2023-2-2 10:00:20",
+      user_id: "",
+      user_name: "my_friend",
+      user_phone: 19991314520,
+      user_password: "123pw",
+      user_age: 18,
+      user_city: "深圳",
     },
   }),
 
@@ -237,23 +211,21 @@ export default {
     my_init() {
       // 初始化表格数据
       // 从后台获取数据
-      this.$http.get("traffic/getAllTraffic").then((res) => {
-        this.traffics = res.data;
+      this.$http.get("user/getAllUser").then((res) => {
+        this.users = res.data;
       });
     },
 
     my_add() {
-      let myTraffic = new URLSearchParams();
-      const traffic = this.editedItem;
-      myTraffic.append("type", traffic.type);
-      myTraffic.append("company", traffic.company);
-      myTraffic.append("money", traffic.money);
-      myTraffic.append("start_position", traffic.start_position);
-      myTraffic.append("end_position", traffic.end_position);
-      myTraffic.append("start_time", traffic.start_time);
-      myTraffic.append("end_time", traffic.end_time);
-      console.log(traffic);
-      this.$http.post(`traffic/addTraffic`,myTraffic).then((res) => {
+      let myUser = new URLSearchParams();
+      const user = this.editedItem;
+      myUser.append("user_name", user.user_name);
+      myUser.append("user_phone", user.user_phone);
+      myUser.append("user_password", user.user_password);
+      myUser.append("user_age", user.user_age);
+      myUser.append("user_city", user.user_city);
+      console.log(user);
+      this.$http.post(`user/addUser`,myUser).then((res) => {
         console.log("res.data-res.data-res.data");
         console.log(res.data);
         if (res.data.insertId > 0) {
@@ -272,19 +244,16 @@ export default {
     },
 
     my_update() {
-      let myTraffic = new URLSearchParams();
-      const traffic = this.editedItem;
-      myTraffic.append("traffic_id", traffic.traffic_id);
-      myTraffic.append("type", traffic.type);
-      myTraffic.append("type", traffic.type);
-      myTraffic.append("company", traffic.company);
-      myTraffic.append("money", traffic.money);
-      myTraffic.append("start_position", traffic.start_position);
-      myTraffic.append("end_position", traffic.end_position);
-      myTraffic.append("start_time", traffic.start_time);
-      myTraffic.append("end_time", traffic.end_time);
-      console.log(traffic);
-      this.$http.post(`traffic/updateTrafficById`, myTraffic).then((res) => {
+      let myUser = new URLSearchParams();
+      const user = this.editedItem;
+      myUser.append("user_id", user.user_id);
+      myUser.append("user_name", user.user_name);
+      myUser.append("user_phone", user.user_phone);
+      myUser.append("user_password", user.user_password);
+      myUser.append("user_age", user.user_age);
+      myUser.append("user_city", user.user_city);
+      console.log(user);
+      this.$http.post(`user/updateUserById`,myUser).then((res) => {
         console.log(res.data);
         if (res.data.changedRows > 0) {
           this.$message({
@@ -303,11 +272,11 @@ export default {
 
     my_deleteId() {
       console.log("deleteById-deleteById-deleteById-deleteById");
-      let myTrafficId = new URLSearchParams();
-      let uid = this.editedItem.traffic_id;
-      myTrafficId.append("traffic_id", uid);
+      let myUserId = new URLSearchParams();
+      let uid = this.editedItem.user_id;
+      myUserId.append("user_id", uid);
       console.log(uid);
-      this.$http.post(`traffic/deleteById`, myTrafficId).then((res) => {
+      this.$http.post(`user/deleteById`, myUserId).then((res) => {
         console.log(res.data);
         if (res.data.affectedRows > 0) {
           this.$message({
@@ -325,19 +294,19 @@ export default {
     },
 
     editItem(item) {
-      this.editedIndex = this.traffics.indexOf(item);
+      this.editedIndex = this.users.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.traffics.indexOf(item);
+      this.editedIndex = this.users.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      // this.traffics.splice(this.editedIndex, 1);
+      // this.users.splice(this.editedIndex, 1);
       this.closeDelete();
       // console.log(this.editedItem);
       this.my_deleteId();
@@ -361,13 +330,13 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        // Object.assign(this.traffics[this.editedIndex], this.editedItem);
+        // Object.assign(this.users[this.editedIndex], this.editedItem);
         console.log("my_updateId-my_updateId");
         this.my_update();
       } else {
-        console.log("addTraffic-addTraffic-addTraffic-addTraffic");
+        console.log("addUser-addUser-addUser-addUser");
         this.my_add();
-        // this.traffics.push(this.editedItem);
+        // this.users.push(this.editedItem);
       }
       this.close();
     },

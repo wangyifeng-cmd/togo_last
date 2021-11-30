@@ -5,6 +5,9 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import './plugins/element.js'
 
+
+import './assets/css/menu.css'
+
 Vue.config.productionTip = false
 
 
