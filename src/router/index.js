@@ -9,8 +9,14 @@ import VueRouter from 'vue-router'
 
 
 import ServerMain from '../views/server/ServerMain.vue'
-import IndexTable from '../views/server/IndexTable.vue'
-import TableUser from '../components/server/TableUser.vue'
+
+
+import TableUser from '../views/server/Table/TableUser.vue'
+import TableCity from '../views/server/Table/TableCity.vue'
+import TableHotel from '../views/server/Table/TableHotel.vue'
+import TableTreffic from '../views/server/Table/TableTreffic.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -23,20 +29,40 @@ const routes = [
     {
         path: '/',
         name: 'ServerMain',
-        component: ServerMain
+        component: ServerMain,
     },
-    {
-        path: '/user/TableUser',
-        name: 'TableUser',
-        component: TableUser
-    },
+    
+    
     {
         path: '/IndexTable',
         name: 'IndexTable',
-        component: IndexTable
+        component: TableUser,
+        children: [
+            {
+                path: 'TableUser',
+                name: 'TableUser',
+                component : TableUser
+            },
+            
+            {
+                path: 'TableTreffic',
+                name: 'TableTreffic',
+                component: TableTreffic
+            },
+            {
+                path: 'TableHotel',
+                name: 'TableHotel',
+                component: TableHotel
+            },
+            {
+                path: 'TableCity',
+                name: 'TableCity',
+                component: TableCity
+            },
+
+        ]
     },
-    
-    
+
 ]
 
 const router = new VueRouter({
