@@ -8,6 +8,7 @@ import './plugins/element.js'
 
 import './assets/css/menu.css'
 
+
 Vue.config.productionTip = false
 
 

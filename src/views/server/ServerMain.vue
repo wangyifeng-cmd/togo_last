@@ -1,4 +1,5 @@
 <template>
+
   <v-app id="inspire" style="background-color: rgba(239, 249, 255, 0.49)">
     <v-navigation-drawer v-model="drawer" app id="my_drawer">
       <!-- 头部 头像+职称+邮箱 -->
@@ -72,27 +73,32 @@
     <!-- 主界面 -->
     <v-main>
       <router-view></router-view>
+
     </v-main>
   </v-app>
 </template>
 
 <script>
+
 export default {
   components: {},
   data: () => ({
     drawer: true,
   }),
   methods: {},
+
 };
 </script>
 
 
 <style scoped>
+
 @import "../../assets/css/menu.css";
 #my_drawer {
   box-shadow: 2px 0 6px rgb(0 11 10 / 25%);
   color: aliceblue;
   font-size: 15px;
 }
+
 
 </style>
