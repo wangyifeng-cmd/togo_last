@@ -144,7 +144,7 @@ export default {
         text: "可入住人数",
         value: "people",
       },
-      {
+      { 
         text: "房间剩余数",
         value: "count",
       },
