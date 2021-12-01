@@ -1,78 +1,104 @@
 <template>
-  <v-app id="inspire">
-    
 
+  <v-app id="inspire" style="background-color: rgba(239, 249, 255, 0.49)">
     <v-navigation-drawer v-model="drawer" app id="my_drawer">
-      <v-sheet color="grey lighten-4" class="pa-4" >
-        <p style="margin-top: 30px; font-size:250%; font-weight: bold;">管理员</p>
-       
-
-        <div>john@vuetifyjs.com</div>
+      <!-- 头部 头像+职称+邮箱 -->
+      <v-sheet
+        color=" lighten-4"
+        class="pa-4"
+        style="background-color: rgba(43, 51, 68, 0.02)"
+      >
+        <v-img
+          src="https://tva1.sinaimg.cn/large/008i3skNgy1gwwa8lpmysj30vm0j6gnt.jpg"
+          height="20%"
+        ></v-img>
+        <p style="margin-top: 30px; font-size: 250%; font-weight: bold">
+          管理员
+        </p>
+        <div>Xinny@github.com</div>
       </v-sheet>
 
       <v-divider></v-divider>
-      <v-list>
-        <v-list-item v-for="[icon, text] in links" :key="icon" link>
-          <v-list-item-icon>
-            <v-icon>{{ icon }}</v-icon>
-          </v-list-item-icon>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ text }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+      <!-- 导航 -->
+      <el-menu router style="margin-left: -20px; font-size: 50px">
+        <el-menu-item index="/WorkSpace">
+          <i class="el-icon-menu" style="margin-right: 20px"></i>
+          <span slot="title">仪表盘</span>
+        </el-menu-item>
+        <el-submenu index="2">
+          <template slot="title">
+            <i class="el-icon-user-solid" style="margin-right: 20px"></i>
+            <span slot="title"> 表格管理</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/TableUser">用户管理</el-menu-item>
+            <el-menu-item index="/TableHotel">酒店管理</el-menu-item>
+            <el-menu-item index="/TableRoom">房间管理</el-menu-item>
+            <el-menu-item index="/TableTreffic"
+              >行程表管理</el-menu-item
+            >
+          </el-menu-item-group>
+        </el-submenu>
+        <el-menu-item index="3">
+          <i class="el-icon-s-management" style="margin-right: 20px"></i>
+          <span slot="title">操作数据</span>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <i class="el-icon-s-marketing" style="margin-right: 20px"></i>
+          <span slot="title">数据图表</span>
+        </el-menu-item>
+      </el-menu>
     </v-navigation-drawer>
 
+    <!-- 头部导航 -->
+    <v-app-bar
+      app
+      style="
+        box-shadow: 0px 0 0px rgb(0 21 41 / 25%);
+        background-color: #26427e;
+        color: aliceblue;
+      "
+    >
+      <v-app-bar-nav-icon
+        color="#F0F8FFFF"
+        @click="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+
+      <v-toolbar-title>ToGo游-后台数据管理</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <i class="el-icon-s-tools" style="size: 80px"></i>
+    </v-app-bar>
+
+    <!-- 主界面 -->
     <v-main>
-      <Title/>
-      <Table />
+      <router-view></router-view>
+
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Table from "../../components/server/Table.vue";
-import Title from "../../components/server/Title.vue";
 
 export default {
-  components: { 
-    Table,
-    Title 
-  },
+  components: {},
   data: () => ({
-    cards: ["Today", "Yesterday"],
-    // drawer: null,
-    links: [
-      ["mdi-inbox-arrow-down", "Inbox"],
-      ["mdi-send", "Send"],
-      ["mdi-delete", "Trash"],
-      ["mdi-alert-octagon", "Spam"],
-    ],
     drawer: true,
-    items: [
-      { title: "Home", icon: "mdi-home-city" },
-      { title: "My Account", icon: "mdi-account" },
-      { title: "Users", icon: "mdi-account-group-outline" },
-    ],
-    mini: true,
   }),
-  methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
+  methods: {},
+
 };
 </script>
 
 
 <style scoped>
+
+@import "../../assets/css/menu.css";
 #my_drawer {
-  
-  box-shadow: 2px 0 6px rgb(0 21 41 / 35%);
+  box-shadow: 2px 0 6px rgb(0 11 10 / 25%);
   color: aliceblue;
+  font-size: 15px;
 }
+
+
 </style>
