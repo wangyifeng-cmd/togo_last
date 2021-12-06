@@ -1,0 +1,132 @@
+@font-face {
+    font-family: 'fruits';
+    src: url('../font/broshk-fruits-img/BroshkLime-BWL5n.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Carattere';
+    src: url('../font/Carattere-img/Carattere-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GravediggerPersonalUse';
+    src: url('../font/gravedigger-img/GravediggerPersonalUse-K7ayW.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'moon';
+    src: url('../font/moonhouse-img/Moonhouse-yE5M.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'painting';
+    src: url('../font/painting-with-chocolate-img/Paintingwithchocolate-K5mo.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Paintingwithchocolate';
+    src: url('../font/painting-with-chocolate-img/Paintingwithchocolate-K5mo.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'os';
+    src: url('../font/OS/HarmonyOS_Sans_TC_Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BarlowLight';
+    src: url('../font/Barlow/BarlowSemiCondensed-Light.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BarlowBold';
+    src: url('../font/Barlow/BarlowSemiCondensed-Bold.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BarlowMedium';
+    src: url('../font/Barlow/BarlowCondensed-Medium.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BarlowSemiBold';
+    src: url('../font/Barlow/BarlowCondensed-SemiBold.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ManropeBold';
+    src: url('../font/Manrope/Manrope-Bold.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ManropeLight';
+    src: url('../font/Manrope/Manrope-Light.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HKGrotesk';
+    src: url('../font/HKGrotesk/HKGrotesk-Light.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NeinBetaExtrabold';
+    src: url('../font/NeinBetaExtrabold/Nein-Beta-Extrabold.woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'oppo1';
+    src: url('../font/oppo/OPPOSans-M.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'oppo2';
+    src: url('../font/oppo/OPPOSans-R.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ADAM';
+    src: url('../font/ADAM/ADAM.CG\ PRO.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Ak';
+    src: url('../font/Ak/Akziden.otf');
+    font-weight: normal;
+    font-style: normal;
+}

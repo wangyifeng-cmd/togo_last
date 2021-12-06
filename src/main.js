@@ -7,6 +7,8 @@ import './plugins/element.js'
 
 
 import './assets/css/menu.css'
+import './assets/css/reset.css'
+import './assets/font/font.css'
 
 
 Vue.config.productionTip = false

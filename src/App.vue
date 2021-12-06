@@ -1,32 +1,23 @@
 <template>
   <div id="app">
-
-
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-
-    <server-main />
-    <!-- <router-view/> -->
-
+    <!-- <server-main /> -->
+    <Home></Home>
   </div>
 </template>
 
 <script>
-
-import ServerMain from "./views/server/ServerMain.vue";
-// import HelloWorld from './components/HelloWorld.vue'
+import Home from "./views/client/home/Home"
+// import ServerMain from "./views/server/ServerMain.vue";
 
 export default {
   name: "app",
   components: {
-    ServerMain,
-    // HelloWorld
+    // ServerMain,
+    Home
   },
 };
 
 </script>
 
 <style>
-#app {
-
-}
 </style>
